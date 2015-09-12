@@ -13,6 +13,7 @@ RUN apt-get install -y nano
 # apache2
 RUN apt-get install -y apache2
 RUN a2enmod rewrite
+RUN sed -i '/ServerRoot "\/etc\/apache2"/ a ServerName localhost' /etc/apache2/apache2.conf
 RUN service apache2 restart
 
 # supervisor
