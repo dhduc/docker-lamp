@@ -1,10 +1,6 @@
-FROM ubuntu:14.04
+FROM tuhoang/lamp:0.1-ubuntu1404
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV INITRD No
+RUN apt-get install -y apache2
+RUN a2enmod rewrite
 
-# manually set mirror to JP
-COPY sources.list /etc/apt/sources.list
-
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y nano
+EXPOSE 80
