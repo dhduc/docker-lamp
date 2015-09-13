@@ -1,6 +1,8 @@
 # docker-lamp
 
-This is my personal development LAMP stack.
+This is my personal development LAMP stack on Docker. It can help you to quickly run multiple websites on your local environment without conflicts. Instead of using *docker-compose* and forwarding ports like common Docker practices, I am using shell scripts to update automatically the host's HOSTS files. Then we can access those local websites with different hostnames on the same port 80.
+
+This approach is trying to keep your local setup as light-weight and as simple as possible.
 
 ## build.sh
 
@@ -15,9 +17,20 @@ Usage:
 $ ./run.sh [PROJECT_NAME] [/PATH/TO/HTML] [/PATH/TO/MYSQL/DATA]
 ```
 All arguments are optional. Their default values are:
-- *PROJECT_NAME* = "tu"
+- *PROJECT_NAME* = "mylocal"
 - */PATH/TO/HTML* = "/home/tuhoang/mydocker/web/public_html"
 - */PATH/TO/MYSQL/DATA* = "home/tuhoang/data/mysql"
+
+### Notice
+
+After the containers start, this script will automatically grab the new IP of *web* and attempt to update your host's HOSTS file with the new IP address.
+
+Example:
+```
+$ ./run.sh mysite.loc /home/tuhoang/www/mysite
+
+$ ping mysite.loc
+```
 
 ## mysql.sh
 
@@ -28,7 +41,7 @@ Usage:
 $ ./mysql.sh [PROJECT_NAME] [USERNAME] [PASSWORD]
 ```
 All arguments are optional. Their default values are:
-- *PROJECT_NAME* = "tu"
+- *PROJECT_NAME* = "mylocal"
 - *USERNAME* = "root"
 - *PASSWORD* = "password"
 
@@ -40,3 +53,5 @@ Usage:
 ```
 $ ./destroy.sh [PROJECT_NAME]
 ```
+All arguments are optional. Their default values are:
+- *PROJECT_NAME* = "mylocal"
