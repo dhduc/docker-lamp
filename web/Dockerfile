@@ -16,6 +16,9 @@ RUN sed -i '/ServerRoot "\/etc\/apache2"/ a ServerName localhost' /etc/apache2/a
 
 # php5
 RUN apt-get install -y php5
+# necessary modules for Magento
+RUN apt-get install -y php5-gd php5-intl php5-mcrypt curl php5-curl
+RUN php5enmod mcrypt
 
 # public_html
 VOLUME /var/www/myweb
