@@ -1,4 +1,5 @@
 FROM ubuntu:14.04
+MAINTAINER Tu Hoang
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV INITRD No

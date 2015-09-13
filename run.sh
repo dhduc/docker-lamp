@@ -1,22 +1,24 @@
 #!/bin/sh
 
-MYWEB="myweb"
+PROJECT="tu"
 if [ -n "$1" ]; then
-    MYWEB=$1
+    PROJECT=$1
 fi
-
-MYDB="mydb"
-if [ -n "$2" ]; then
-    MYDB=$2
-fi
+MYWEB="${PROJECT}web"
+MYDB="${PROJECT}db"
 
 MYWEBDIR="/home/tuhoang/mydocker/web/public_html"
+if [ -n "$2" ]; then
+    MYWEBDIR=$2
+fi
+
+MYSQLDIR="/home/tuhoang/data/mysql"
 if [ -n "$3" ]; then
     MYWEBDIR=$3
 fi
 
 echo Starting MySQL ...
-docker run -d -p 3306:3306 --name $MYDB -v /home/tuhoang/data/mysql:/var/lib/mysql \
+docker run -d -p 3306:3306 --name $MYDB -v ${MYSQLDIR}:/var/lib/mysql \
  -e MYSQL_ROOT_PASSWORD=password \
  -e MYSQL_USER=magento \
  -e MYSQL_PASSWORD=password \

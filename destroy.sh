@@ -1,14 +1,11 @@
 #!/bin/sh
 
-MYWEB="myweb"
+PROJECT="tu"
 if [ -n "$1" ]; then
-    MYWEB=$1
+    PROJECT=$1
 fi
-
-MYDB="mydb"
-if [ -n "$2" ]; then
-    MYDB=$2
-fi
+MYWEB="${PROJECT}web"
+MYDB="${PROJECT}db"
 
 docker stop $MYDB $MYWEB
 docker rm $MYDB $MYWEB
