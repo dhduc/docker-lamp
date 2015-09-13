@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV INITRD No
 
 # manually set mirror to JP
-COPY sources.list /etc/apt/sources.list
+COPY conf/sources.list /etc/apt/sources.list
 
 # base update
 RUN apt-get update && apt-get upgrade -y
@@ -19,7 +19,7 @@ RUN apt-get install -y php5
 
 # public_html
 VOLUME /var/www/myweb
-COPY vhost-myweb.conf /etc/apache2/sites-enabled/000-default.conf
+COPY conf/vhost-myweb.conf /etc/apache2/sites-enabled/000-default.conf
 
 # I need it to restart once before supervisor to work. Harmless anyway.
 RUN service apache2 restart
