@@ -13,6 +13,14 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y apache2
 RUN a2enmod rewrite
 RUN sed -i '/ServerRoot "\/etc\/apache2"/ a ServerName localhost' /etc/apache2/apache2.conf
+
+# php5
+RUN apt-get install -y php5
+
+# public_html
+VOLUME /var/www/myweb
+COPY vhost-myweb.conf /etc/apache2/sites-enabled/000-default.conf
+
 # I need it to restart once before supervisor to work. Harmless anyway.
 RUN service apache2 restart
 

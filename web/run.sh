@@ -1,3 +1,11 @@
 #!/bin/sh
 
-docker run -d -p 80:80 -p 3306:3306 --name=myweb tuhoang/lamp
+MYWEBDIR="/home/tuhoang/mydocker/web/public_html"
+
+if [ -n $1 ]; then
+    MYWEBDIR=$1
+fi
+
+echo Mounting $MYWEBDIR ...
+
+docker run -d -p 80:80 -v ${MYWEBDIR}:/var/www/myweb --name=myweb tuhoang/web
