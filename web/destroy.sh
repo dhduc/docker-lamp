@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker stop mybox
-docker rm mybox
+docker stop myweb
+docker rm myweb
