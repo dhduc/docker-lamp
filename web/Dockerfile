@@ -19,6 +19,7 @@ RUN apt-get install -y php5
 # necessary modules for Magento
 RUN apt-get install -y php5-gd php5-intl php5-mcrypt curl php5-curl
 RUN php5enmod mcrypt
+RUN apt-get install -y mysql-client php5-mysql
 
 # public_html
 VOLUME /var/www/myweb
