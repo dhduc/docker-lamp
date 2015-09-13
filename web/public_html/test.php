@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:dbname=db_magento;host=mydb;port=3306';
+$dsn = 'mysql:dbname=db_magento;host=mylocaldb;port=3306';
 $username = 'magento';
 $password = 'password';
 try {
@@ -7,4 +7,5 @@ try {
 } catch(PDOException $e) {
     die('Could not connect to the database:<br/>' . $e);
 }
+$db = null;
 echo 'working';
