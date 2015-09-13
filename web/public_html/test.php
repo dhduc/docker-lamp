@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:dbname=db_magento;host=mylocaldb;port=3306';
+$dsn = 'mysql:dbname=db_magento;host=mysql;port=3306';
 $username = 'magento';
 $password = 'password';
 try {

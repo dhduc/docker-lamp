@@ -10,7 +10,9 @@ This script will create a Docker image *tuhoang/web* which has ubuntu 14.04, apa
 
 ## run.sh
 
-This script will create and start 2 containers *web* and *mysql*.
+This script will create and start a new container from image *tuhoang/web*. Our web containers will connect and share only one database container *mysql*. This script will automatically setup or re-use that container if it has been already available.
+
+The database container *mysql* has root password is "password".
 
 Usage:
 ```

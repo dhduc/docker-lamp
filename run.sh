@@ -1,11 +1,11 @@
 #!/bin/sh
 
+MYDB="mysql"
+
 PROJECT="mylocal"
 if [ -n "$1" ]; then
     PROJECT=$1
 fi
-MYWEB="${PROJECT}web"
-MYDB="${PROJECT}db"
 
 MYWEBDIR="/home/tuhoang/mydocker/web/public_html"
 if [ -n "$2" ]; then
@@ -14,28 +14,45 @@ fi
 
 MYSQLDIR="/home/tuhoang/data/mysql"
 if [ -n "$3" ]; then
-    MYWEBDIR=$3
+    MYSQLDIR=$3
 fi
 
-echo Starting MySQL
-echo Loading $MYSQLDIR
-docker run -d --name $MYDB -v ${MYSQLDIR}:/var/lib/mysql \
- -e MYSQL_ROOT_PASSWORD=password \
- -e MYSQL_USER=magento \
- -e MYSQL_PASSWORD=password \
- -e MYSQL_DATABASE=db_magento \
- mysql/mysql-server
+# find MySQL container
+MYSQL_CONTAINER=$(docker ps | grep $MYDB | awk '{print $1}')
+if [ -z "$MYSQL_CONTAINER" ]; then
+    # maybe it was stopped
+    MYSQL_CONTAINER=$(docker ps -a | grep $MYDB | awk '{print $1}')
+    if [ -z "$MYSQL_CONTAINER" ]; then
+        echo Starting MySQL
+        echo Loading $MYSQLDIR
+        docker run -d --name $MYDB -v ${MYSQLDIR}:/var/lib/mysql \
+            -e MYSQL_ROOT_PASSWORD=password \
+            -e MYSQL_USER=magento \
+            -e MYSQL_PASSWORD=password \
+            -e MYSQL_DATABASE=db_magento \
+            mysql/mysql-server
+    else
+        echo Stopped MySQL container found. Restarting...
+        docker start $MYDB
+    fi
+else
+    echo Running MySQL container found!
+fi
 
+# start web
 echo
 echo Starting Web
 echo Mounting $MYWEBDIR
-docker run -d -v ${MYWEBDIR}:/var/www/myweb --name $MYWEB --link $MYDB:mysql tuhoang/web
-CONTAINER_ID=$(docker ps | grep $MYWEB | awk '{print $1}')
+docker run -d -v ${MYWEBDIR}:/var/www/myweb --name $PROJECT --link $MYDB:mysql tuhoang/web
+
+# find the new dynamic IP address
+CONTAINER_ID=$(docker ps | grep $PROJECT | awk '{print $1}')
 IP=$(docker inspect $CONTAINER_ID | python -c 'import json,sys;obj=json.load(sys.stdin);print obj[0]["NetworkSettings"]["IPAddress"]')
 echo
-echo \"$MYWEB\" loaded at $IP
+echo \"$PROJECT\" loaded at $IP
 echo
 
+# update HOSTS file
 echo Attempting to update HOSTS file...
 condition="grep -q '"$PROJECT"' /etc/hosts"
 if eval $condition; then
