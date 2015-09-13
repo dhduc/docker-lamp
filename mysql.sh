@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROJECT="tu"
+PROJECT="mylocal"
 if [ -n "$1" ]; then
     PROJECT=$1
 fi
