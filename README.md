@@ -14,11 +14,23 @@ Usage:
 ```
 $ ./run.sh [PROJECT_NAME] [/PATH/TO/HTML] [/PATH/TO/MYSQL/DATA]
 ```
-
 All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "tu"
 - */PATH/TO/HTML* = "/home/tuhoang/mydocker/web/public_html"
 - */PATH/TO/MYSQL/DATA* = "home/tuhoang/data/mysql"
+
+## mysql.sh
+
+Run this script to connect to MySQL container from host.
+
+Usage:
+```
+$ ./mysql.sh [PROJECT_NAME] [USERNAME] [PASSWORD]
+```
+All arguments are optional. Their default values are:
+- *PROJECT_NAME* = "tu"
+- *USERNAME* = "root"
+- *PASSWORD* = "password"
 
 ## destroy.sh
 
