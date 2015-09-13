@@ -1,10 +1,9 @@
 #!/bin/sh
 
-PROJECT="mylocal"
+MYDB="mysql"
 if [ -n "$1" ]; then
-    PROJECT=$1
+    MYDB=$1
 fi
-MYDB="${PROJECT}db"
 
 MYUSER="root"
 if [ -n "$2" ]; then

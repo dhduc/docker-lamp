@@ -20,8 +20,8 @@ $ ./run.sh [PROJECT_NAME] [/PATH/TO/HTML] [/PATH/TO/MYSQL/DATA]
 ```
 All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "mylocal"
-- */PATH/TO/HTML* = "/home/tuhoang/mydocker/web/public_html"
-- */PATH/TO/MYSQL/DATA* = "home/tuhoang/data/mysql"
+- */PATH/TO/HTML* = "/path/to/current/dir/web/public_html"
+- */PATH/TO/MYSQL/DATA* = "home/youraccount/data/mysql"
 
 ### Notice
 
@@ -29,7 +29,7 @@ After the containers start, this script will automatically grab the new IP of *w
 
 Example:
 ```
-$ ./run.sh mysite.loc /home/tuhoang/www/mysite
+$ ./run.sh mysite.loc /home/youraccount/www/mysite
 
 $ ping mysite.loc
 ```

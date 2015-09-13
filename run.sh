@@ -7,12 +7,13 @@ if [ -n "$1" ]; then
     PROJECT=$1
 fi
 
-MYWEBDIR="/home/tuhoang/mydocker/web/public_html"
+CURRENT_DIR=$(pwd)
+MYWEBDIR=$CURRENT_DIR"/web/public_html"
 if [ -n "$2" ]; then
     MYWEBDIR=$2
 fi
 
-MYSQLDIR="/home/tuhoang/data/mysql"
+MYSQLDIR=$HOME"/data/mysql"
 if [ -n "$3" ]; then
     MYSQLDIR=$3
 fi
