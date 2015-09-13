@@ -21,6 +21,11 @@ RUN apt-get install -y php5-gd php5-intl php5-mcrypt curl php5-curl
 RUN php5enmod mcrypt
 RUN apt-get install -y mysql-client php5-mysql
 
+# xdebug for remote debug and keep it disabled
+RUN apt-get install -y php5-xdebug
+RUN php5dismod xdebug
+RUN sed -i '/zend_extension=xdebug.so/ a xdebug.remote_enable=On\nxdebug.remote_connect_back=On' /etc/php5/mods-available/xdebug.ini
+
 # public_html
 VOLUME /var/www/myweb
 COPY conf/vhost-myweb.conf /etc/apache2/sites-enabled/000-default.conf
@@ -28,11 +33,11 @@ COPY conf/vhost-myweb.conf /etc/apache2/sites-enabled/000-default.conf
 # I need it to restart once before supervisor to work. Harmless anyway.
 RUN service apache2 restart
 
-# supervisor - we will need it for multi-process docker in future, eg: apache+ssh
-#RUN apt-get install -y supervisor
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# supervisor - we can restart apache without stopping the container
+RUN apt-get install -y supervisor
+COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-#CMD ["/usr/bin/supervisord"]
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+CMD ["/usr/bin/supervisord"]
+#CMD /usr/sbin/apache2ctl -D FOREGROUND
