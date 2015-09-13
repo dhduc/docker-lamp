@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t tuhoang/lamp .
+docker build -t tuhoang/web .
