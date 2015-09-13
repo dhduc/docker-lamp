@@ -31,7 +31,11 @@ Example:
 ```
 $ ./run.sh mysite.loc /home/youraccount/www/mysite
 
+$ ./run.sh myblog.loc /home/youraccount/www/myblog
+
 $ ping mysite.loc
+
+$ ping myblog.loc
 ```
 
 ## mysql.sh
