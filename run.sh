@@ -24,7 +24,7 @@ if [ -z "$MYSQL_CONTAINER" ]; then
     # maybe it was stopped
     MYSQL_CONTAINER=$(docker ps -a | grep $MYDB | awk '{print $1}')
     if [ -z "$MYSQL_CONTAINER" ]; then
-        echo Starting MySQL
+        echo Starting MySQL...
         echo Loading $MYSQLDIR
         docker run -d --name $MYDB -v ${MYSQLDIR}:/var/lib/mysql \
             -e MYSQL_ROOT_PASSWORD=password \
@@ -40,11 +40,22 @@ else
     echo Running MySQL container found!
 fi
 
-# start web
-echo
-echo Starting Web
-echo Mounting $MYWEBDIR
-docker run -d -v ${MYWEBDIR}:/var/www/myweb --name $PROJECT --link $MYDB:mysql tuhoang/web
+# find web container
+WEB_CONTAINER=$(docker ps | grep $PROJECT | awk '{print $1}')
+if [ -z "$WEB_CONTAINER" ]; then
+    # maybe it was stopped
+    WEB_CONTAINER=$(docker ps -a | grep $PROJECT | awk '{print $1}')
+    if [ -z "$WEB_CONTAINER" ]; then
+        echo Starting "$PROJECT" web container...
+        echo Mounting $MYWEBDIR
+        docker run -d -v ${MYWEBDIR}:/var/www/myweb --name $PROJECT --link $MYDB:mysql tuhoang/web
+    else
+        echo Found existing web container. Starting \"$PROJECT\" web container...
+        docker start $PROJECT
+    fi
+else
+    echo Running "$PROJECT" web container found!
+fi
 
 # find the new dynamic IP address
 CONTAINER_ID=$(docker ps | grep $PROJECT | awk '{print $1}')
