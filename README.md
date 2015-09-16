@@ -1,6 +1,6 @@
 # docker-lamp
 
-This is my personal development LAMP stack on Docker. It can help you to quickly run multiple websites on your local environment without conflicts. Instead of using *docker-compose* and forwarding ports like common Docker practices, I am using shell scripts to update automatically the host's HOSTS files. Then we can access those local websites with different hostnames on the same port 80.
+This is my personal development LAMP stack on Docker. It can help you to quickly run multiple websites on your local environment without conflicts. Instead of using *docker-compose*, reverse proxy or forwarding ports like common Docker practices, I am using shell scripts to update automatically the host's HOSTS files. Then we can access those local websites with different hostnames on the same port 80.
 
 This approach is trying to keep your local setup as light-weight and as simple as possible.
 
