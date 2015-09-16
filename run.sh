@@ -54,7 +54,7 @@ if [ -z "$WEB_CONTAINER" ]; then
         docker start $PROJECT
     fi
 else
-    echo Running "$PROJECT" web container found!
+    echo Running \"$PROJECT\" web container found!
 fi
 
 # find the new dynamic IP address
