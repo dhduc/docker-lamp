@@ -44,10 +44,10 @@ Run this script to connect to MySQL container from host.
 
 Usage:
 ```
-$ ./mysql.sh [PROJECT_NAME] [USERNAME] [PASSWORD]
+$ ./mysql.sh [MYSQL_CONTAINER_NAME] [USERNAME] [PASSWORD]
 ```
 All arguments are optional. Their default values are:
-- *PROJECT_NAME* = "mylocal"
+- *MYSQL_CONTAINER_NAME* = "mysql"
 - *USERNAME* = "root"
 - *PASSWORD* = "password"
 
