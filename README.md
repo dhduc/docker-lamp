@@ -58,7 +58,7 @@ $ docker exec -i MYSQL_CONTAINER_NAME mysql -uroot -ppassword < dump.sql
 
 Export a database from MySQL container to a dump file on host:
 ```
-$ docker exec -i MYSQL_CONTAINER_NAME mysqldump -uroot -ppassword dbname > dump.sql`
+$ docker exec -i MYSQL_CONTAINER_NAME mysqldump -uroot -ppassword dbname > dump.sql
 ```
 
 ## destroy.sh
