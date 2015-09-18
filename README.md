@@ -1,18 +1,20 @@
 # docker-lamp
 
-This is my personal development LAMP stack on Docker. It can help you to quickly run multiple websites on your local environment without conflicts. Instead of using *docker-compose*, reverse proxy or forwarding ports like common Docker practices, I am using shell scripts to update automatically the host's HOSTS files. Then we can access those local websites with different hostnames on the same port 80.
+This is my personal development LAMP stack on Docker. It can help you to quickly run multiple websites on your local environment without conflicts. Instead of using reverse proxy, pipe network or forwarding ports like common Docker practices, I am using shell scripts to update automatically the host's HOSTS files. Then we can access those local websites with different hostnames on the same port 80.
 
 This approach is trying to keep your local setup as light-weight and as simple as possible.
 
+**WARNING: no love for Windows developers here!**
+
 ## build.sh
 
-This script will create a Docker image *tuhoang/web* which has ubuntu 14.04, apache 2, php 5.5 and my typical configurations for local development. The detailed steps are in *web/Dockerfile*. You can skip this step because I published that image to Docker Hub.
+This script will create a Docker image **tuhoang/web** which has ubuntu 14.04, apache 2, php 5.5 and my typical configurations for local development. The detailed steps are in **web/Dockerfile**. You can skip this step because I published that image to Docker Hub.
 
 ## run.sh
 
-This script will create and start a new container from image *tuhoang/web*. Our web containers will connect and share only one database container *mysql*. This script will automatically setup or re-use that container if it has been already available.
+This script will create and start a new container from image **tuhoang/web**. Our web containers will connect and share only one database container **mysql**. This script will automatically setup or re-use that container if it has been already available.
 
-The database container *mysql* has root password is "password".
+The database container **mysql** has root password is "password".
 
 Usage:
 ```
@@ -25,7 +27,7 @@ All arguments are optional. Their default values are:
 
 ### Notice
 
-After the containers start, this script will automatically grab the new IP of *web* and attempt to update your host's HOSTS file with the new IP address.
+After the containers start, this script will automatically grab the new IP of the web container and attempt to update your host's HOSTS file with the new IP address.
 
 Example:
 ```
