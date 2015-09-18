@@ -16,25 +16,26 @@ This script will create and start a new container from image **tuhoang/web**, or
 
 Our web containers will connect and share only one database container **mysql**. This script will automatically setup a mysql container or re-use one if it has been already available.
 
-The database container **mysql** has root password is "password". And it stores the persistent data on the host at "home/youraccount/data/mysql" by default.
+The database container **mysql** has root password is "password". And it stores the persistent data on the host at "home/youraccount/data/mysql" by default. You also can customize its startup configuration by editing the file **web/conf/my.cnf**.
 
 Usage:
 ```
+$ chmod 755 web/conf/my.cnf
+$ chmod -R 755 web/public_html
+
 $ ./run.sh [PROJECT_NAME] [/PATH/TO/HTML] [/PATH/TO/MYSQL/DATA]
 ```
 All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "mylocal"
-- */PATH/TO/HTML* = "/path/to/current/dir/web/public_html"
+- */PATH/TO/HTML* = "/path/to/current/dir/web/public_html" - you should set its permission to 755
 - */PATH/TO/MYSQL/DATA* = "home/youraccount/data/mysql"
 
 Example:
 ```
 $ ./run.sh mysite.loc /home/youraccount/www/mysite
-
 $ ./run.sh myblog.loc /home/youraccount/www/myblog
 
 $ ping mysite.loc
-
 $ ping myblog.loc
 ```
 
@@ -75,11 +76,3 @@ $ ./destroy.sh [PROJECT_NAME]
 ```
 All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "mylocal"
-
-# Put those scripts to be system-wide accessible
-
-```
-$ sudo ln -s /home/youraccount/docker-lamp/run.sh /usr/local/bin/dl-run
-$ sudo ln -s /home/youraccount/docker-lamp/destroy.sh /usr/local/bin/dl-destroy
-$ sudo ln -s /home/youraccount/docker-lamp/mysql.sh /usr/local/bin/dl-mysql
-```

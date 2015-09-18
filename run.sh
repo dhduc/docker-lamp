@@ -18,27 +18,41 @@ if [ -n "$3" ]; then
     MYSQLDIR=$3
 fi
 
+MYCNF=$CURRENT_DIR"/web/conf/my.cnf"
+
 # find MySQL container
 MYSQL_CONTAINER=$(docker ps | grep $MYDB | awk '{print $1}')
 if [ -z "$MYSQL_CONTAINER" ]; then
     # maybe it was stopped
     MYSQL_CONTAINER=$(docker ps -a | grep $MYDB | awk '{print $1}')
     if [ -z "$MYSQL_CONTAINER" ]; then
-        echo Starting MySQL...
-        echo Loading $MYSQLDIR
+        echo Starting MySQL container \"$MYDB\"...
+        echo Loading config from: $MYCNF
+        echo Loading data from: $MYSQLDIR
         docker run -d --name $MYDB -v ${MYSQLDIR}:/var/lib/mysql \
+            -v ${MYCNF}:/etc/my.cnf \
             -e MYSQL_ROOT_PASSWORD=password \
             -e MYSQL_USER=magento \
             -e MYSQL_PASSWORD=password \
             -e MYSQL_DATABASE=db_magento \
             mysql/mysql-server
+        if [ "$?" -ne 0 ]; then
+            echo ERROR: Could not start MySQL container.
+            exit 1
+        fi
     else
         echo Stopped MySQL container found. Restarting...
         docker start $MYDB
+        if [ "$?" -ne 0 ]; then
+            echo ERROR: Could not restart MySQL container.
+            exit 1
+        fi
     fi
 else
     echo Running MySQL container found!
 fi
+
+echo
 
 # find web container
 WEB_CONTAINER=$(docker ps | grep $PROJECT | awk '{print $1}')
@@ -46,9 +60,13 @@ if [ -z "$WEB_CONTAINER" ]; then
     # maybe it was stopped
     WEB_CONTAINER=$(docker ps -a | grep $PROJECT | awk '{print $1}')
     if [ -z "$WEB_CONTAINER" ]; then
-        echo Starting "$PROJECT" web container...
+        echo Starting web container \"$PROJECT\"...
         echo Mounting $MYWEBDIR
         docker run -d -v ${MYWEBDIR}:/var/www/myweb --name $PROJECT --link $MYDB:mysql tuhoang/web
+        if [ "$?" -ne 0 ]; then
+            echo ERROR: Could not start web container.
+            exit 1
+        fi
     else
         echo Found existing web container. Starting \"$PROJECT\" web container...
         docker start $PROJECT
