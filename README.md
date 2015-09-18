@@ -44,6 +44,10 @@ Connect to MySQL container from host.
 
 Usage:
 ```
+$ ./mysql.sh [MYSQL_CONTAINER_NAME] [USERNAME] [PASSWORD]
+
+# OR
+
 $ docker exec -it [MYSQL_CONTAINER_NAME] mysql -u[USERNAME] -p[PASSWORD]
 ```
 Their default values are:
