@@ -12,7 +12,9 @@ This script will create a Docker image **tuhoang/web** which has ubuntu 14.04, a
 
 ## run.sh
 
-This script will create and start a new container from image **tuhoang/web**. Our web containers will connect and share only one database container **mysql**. This script will automatically setup or re-use that container if it has been already available.
+This script will create and start a new container from image **tuhoang/web**, or restart a stopped one. After the web container start, this script will automatically grab the new IP of the web container and attempt to update your host's HOSTS file with the new IP address.
+
+Our web containers will connect and share only one database container **mysql**. This script will automatically setup a mysql container or re-use one if it has been already available.
 
 The database container **mysql** has root password is "password".
 
@@ -24,10 +26,6 @@ All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "mylocal"
 - */PATH/TO/HTML* = "/path/to/current/dir/web/public_html"
 - */PATH/TO/MYSQL/DATA* = "home/youraccount/data/mysql"
-
-### Notice
-
-After the containers start, this script will automatically grab the new IP of the web container and attempt to update your host's HOSTS file with the new IP address.
 
 Example:
 ```
