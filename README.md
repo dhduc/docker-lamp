@@ -16,7 +16,7 @@ This script will create and start a new container from image **tuhoang/web**, or
 
 Our web containers will connect and share only one database container **mysql**. This script will automatically setup a mysql container or re-use one if it has been already available.
 
-The database container **mysql** has root password is "password".
+The database container **mysql** has root password is "password". And it stores the persistent data on the host at "home/youraccount/data/mysql" by default.
 
 Usage:
 ```
