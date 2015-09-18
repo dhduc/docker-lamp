@@ -59,7 +59,7 @@ fi
 
 # find the new dynamic IP address
 CONTAINER_ID=$(docker ps | grep $PROJECT | awk '{print $1}')
-IP=$(docker inspect $CONTAINER_ID | python -c 'import json,sys;obj=json.load(sys.stdin);print obj[0]["NetworkSettings"]["IPAddress"]')
+IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $PROJECT)
 echo
 echo \"$PROJECT\" loaded at $IP
 echo
