@@ -66,11 +66,11 @@ echo
 
 # update HOSTS file
 echo Attempting to update HOSTS file...
-condition="grep -q '"$PROJECT"' /etc/hosts"
-if eval $condition; then
-    cmd="sudo sed -i -r \"s/^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+( +"$PROJECT")/"$IP" "$PROJECT"/\" /etc/hosts";
+CONDITION="grep -q '"$PROJECT"' /etc/hosts"
+if eval $CONDITION; then
+    CMD="sudo sed -i -r \"s/^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+( +"$PROJECT")/"$IP" "$PROJECT"/\" /etc/hosts";
 else
-    cmd="sudo sed -i '\$a\\\\n# added automatically by docker-lamp run.sh\n"$IP" "$PROJECT"\n' /etc/hosts";
+    CMD="sudo sed -i '\$a\\\\n# added automatically by docker-lamp run.sh\n"$IP" "$PROJECT"\n' /etc/hosts";
 fi
-eval $cmd
+eval $CMD
 echo "All done!"
