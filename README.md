@@ -38,27 +38,27 @@ $ ping mysite.loc
 $ ping myblog.loc
 ```
 
-## mysql.sh
+## Interact with MySQL
 
-Run this script to connect to MySQL container from host.
+Connect to MySQL container from host.
 
 Usage:
 ```
-$ ./mysql.sh [MYSQL_CONTAINER_NAME] [USERNAME] [PASSWORD]
+$ docker exec -it [MYSQL_CONTAINER_NAME] mysql -u[USERNAME] -p[PASSWORD]
 ```
-All arguments are optional. Their default values are:
+Their default values are:
 - *MYSQL_CONTAINER_NAME* = "mysql"
 - *USERNAME* = "root"
 - *PASSWORD* = "password"
 
 Import a SQL dump directly from host into MySQL container:
 ```
-$ docker exec -i MYSQL_CONTAINER_NAME mysql -uroot -ppassword < dump.sql
+$ docker exec -i [MYSQL_CONTAINER_NAME] mysql -uroot -ppassword < dump.sql
 ```
 
 Export a database from MySQL container to a dump file on host:
 ```
-$ docker exec -i MYSQL_CONTAINER_NAME mysqldump -uroot -ppassword dbname > dump.sql
+$ docker exec -i [MYSQL_CONTAINER_NAME] mysqldump -uroot -ppassword dbname > dump.sql
 ```
 
 ## destroy.sh
@@ -76,6 +76,5 @@ All arguments are optional. Their default values are:
 
 ```
 $ sudo ln -s /home/youraccount/docker-lamp/run.sh /usr/local/bin/dl-run
-$ sudo ln -s /home/youraccount/docker-lamp/mysql.sh /usr/local/bin/dl-mysql
 $ sudo ln -s /home/youraccount/docker-lamp/destroy.sh /usr/local/bin/dl-destroy
 ```
