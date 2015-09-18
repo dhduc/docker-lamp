@@ -81,4 +81,5 @@ All arguments are optional. Their default values are:
 ```
 $ sudo ln -s /home/youraccount/docker-lamp/run.sh /usr/local/bin/dl-run
 $ sudo ln -s /home/youraccount/docker-lamp/destroy.sh /usr/local/bin/dl-destroy
+$ sudo ln -s /home/youraccount/docker-lamp/mysql.sh /usr/local/bin/dl-mysql
 ```
