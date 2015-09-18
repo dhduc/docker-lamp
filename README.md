@@ -63,7 +63,7 @@ $ docker exec -i MYSQL_CONTAINER_NAME mysqldump -uroot -ppassword dbname > dump.
 
 ## destroy.sh
 
-This script will stop and remove your containers.
+This script will stop and remove your containers. It won't remove the container's IP address from your HOSTS file because that action is not usual and I prefer to remove that entry by hands.
 
 Usage:
 ```
