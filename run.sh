@@ -59,7 +59,17 @@ fi
 
 # find the new dynamic IP address
 CONTAINER_ID=$(docker ps | grep $PROJECT | awk '{print $1}')
+if [ -z "$CONTAINER_ID" ]; then
+    echo ERROR: Container \"$PROJECT\" could not be started.
+    exit 1
+fi
+
 IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $PROJECT)
+if [ -z "$IP" ]; then
+    echo ERROR: Could not find the IP address of container \"$PROJECT\".
+    exit 1
+fi
+
 echo
 echo \"$PROJECT\" loaded at $IP
 echo
