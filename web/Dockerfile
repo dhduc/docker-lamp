@@ -15,12 +15,24 @@ RUN apt-get install -y apache2
 RUN a2enmod rewrite
 RUN sed -i '/ServerRoot "\/etc\/apache2"/ a ServerName localhost' /etc/apache2/apache2.conf
 
-# php5
-RUN apt-get install -y php5
-# necessary modules for Magento
-RUN apt-get install -y php5-gd php5-intl php5-mcrypt curl php5-curl
+# php5 and necessary modules for Magento
+RUN apt-get install -y php5 php5-gd php5-intl php5-mcrypt curl php5-curl mysql-client php5-mysql
 RUN php5enmod mcrypt
-RUN apt-get install -y mysql-client php5-mysql
+
+# tweak some PHP settings for local development
+RUN sed -i -r "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini
+RUN sed -i -r "s/^memory_limit = .*/memory_limit = 512M/" /etc/php5/apache2/php.ini
+RUN sed -i -r "s/^;realpath_cache_size = .*/realpath_cache_size = 64k/" /etc/php5/apache2/php.ini
+RUN sed -i -r "s/^;realpath_cache_ttl = .*/realpath_cache_ttl = 3600/" /etc/php5/apache2/php.ini
+RUN sed -i -r "s/post_max_size = .*/post_max_size = 48M/" /etc/php5/apache2/php.ini
+RUN sed -i -r "s/upload_max_filesize = .*/upload_max_filesize = 32M/" /etc/php5/apache2/php.ini
+
+RUN sed -i -r "s/display_errors = Off/display_errors = On/" /etc/php5/cli/php.ini
+RUN sed -i -r "s/^memory_limit = .*/memory_limit = 512M/" /etc/php5/cli/php.ini
+RUN sed -i -r "s/^;realpath_cache_size = .*/realpath_cache_size = 64k/" /etc/php5/cli/php.ini
+RUN sed -i -r "s/^;realpath_cache_ttl = .*/realpath_cache_ttl = 3600/" /etc/php5/cli/php.ini
+RUN sed -i -r "s/post_max_size = .*/post_max_size = 48M/" /etc/php5/cli/php.ini
+RUN sed -i -r "s/upload_max_filesize = .*/upload_max_filesize = 32M/" /etc/php5/cli/php.ini
 
 # xdebug for remote debug and keep it disabled
 RUN apt-get install -y php5-xdebug
