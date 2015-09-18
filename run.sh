@@ -70,6 +70,10 @@ if [ -z "$WEB_CONTAINER" ]; then
     else
         echo Found existing web container. Starting \"$PROJECT\" web container...
         docker start $PROJECT
+        if [ "$?" -ne 0 ]; then
+            echo ERROR: Could not restart web container.
+            exit 1
+        fi
     fi
 else
     echo Running \"$PROJECT\" web container found!
@@ -100,5 +104,11 @@ if eval $CONDITION; then
 else
     CMD="sudo sed -i '\$a\\\\n# added automatically by docker-lamp run.sh\n"$IP" "$PROJECT"\n' /etc/hosts";
 fi
+
 eval $CMD
+if [ "$?" -ne 0 ]; then
+    echo ERROR: Could not update HOSTS file.
+    exit 1
+fi
+
 echo "All done!"
