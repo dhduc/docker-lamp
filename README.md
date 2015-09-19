@@ -6,7 +6,7 @@ This approach is trying to keep your local setup as light-weight and as simple a
 
 **WARNING: no love for Windows developers here!**
 
-**Requirement: installed Docker**
+**REQUIREMENT: installed Docker**
 
 ## build.sh
 
