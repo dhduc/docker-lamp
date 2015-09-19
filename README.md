@@ -6,6 +6,8 @@ This approach is trying to keep your local setup as light-weight and as simple a
 
 **WARNING: no love for Windows developers here!**
 
+**Requirement: installed Docker**
+
 ## build.sh
 
 This script will create a Docker image **tuhoang/web** which has ubuntu 14.04, apache 2, php 5.5 and my typical configurations for local development. The detailed steps are in **web/Dockerfile**. You can skip this step because I published that image to Docker Hub.
