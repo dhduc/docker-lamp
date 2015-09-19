@@ -76,3 +76,11 @@ $ ./destroy.sh [PROJECT_NAME]
 ```
 All arguments are optional. Their default values are:
 - *PROJECT_NAME* = "mylocal"
+
+# Make those scripts as system commands
+
+```
+sudo ln -s /home/youraccount/docker-lamp/run.sh /usr/local/bin/dl-run
+sudo ln -s /home/youraccount/docker-lamp/mysql.sh /usr/local/bin/dl-mysql
+sudo ln -s /home/youraccount/docker-lamp/destroy.sh /usr/local/bin/dl-destroy
+```

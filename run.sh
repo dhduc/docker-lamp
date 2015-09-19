@@ -7,8 +7,10 @@ if [ -n "$1" ]; then
     PROJECT=$1
 fi
 
-CURRENT_DIR=$(pwd)
-MYWEBDIR=$CURRENT_DIR"/web/public_html"
+SCRIPT=$(readlink -f "$0")
+BASEDIR=$(dirname "$SCRIPT")
+
+MYWEBDIR=$BASEDIR"/web/public_html"
 if [ -n "$2" ]; then
     MYWEBDIR=$2
 fi
@@ -18,7 +20,7 @@ if [ -n "$3" ]; then
     MYSQLDIR=$3
 fi
 
-MYCNF=$CURRENT_DIR"/web/conf/my.cnf"
+MYCNF=$BASEDIR"/web/conf/my.cnf"
 
 # find MySQL container
 MYSQL_CONTAINER=$(docker ps | grep $MYDB | awk '{print $1}')
