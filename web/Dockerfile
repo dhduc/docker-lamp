@@ -4,8 +4,8 @@ MAINTAINER Tu Hoang
 ENV DEBIAN_FRONTEND noninteractive
 ENV INITRD No
 
-# manually set mirror to JP
-COPY conf/sources.list /etc/apt/sources.list
+# manually set mirror to SG
+RUN sed -i "s/archive.ubuntu.com/download.nus.edu.sg/" /etc/apt/sources.list
 
 # base update
 RUN apt-get update && apt-get upgrade -y
