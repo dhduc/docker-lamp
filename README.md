@@ -60,7 +60,7 @@ Their default values are:
 
 Import a SQL dump directly from host into MySQL container:
 ```
-$ docker exec -i [MYSQL_CONTAINER_NAME] mysql -uroot -ppassword < dump.sql
+$ docker exec -i [MYSQL_CONTAINER_NAME] mysql -uroot -ppassword dbname < dump.sql
 ```
 
 Export a database from MySQL container to a dump file on host:
