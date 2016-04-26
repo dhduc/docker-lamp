@@ -4,7 +4,7 @@ This is my personal development LAMP stack on Docker. It can help you to quickly
 
 This approach is trying to keep your local setup as light-weight and as simple as possible.
 
-**WARNING: no love for Windows developers here!**
+**WARNING: no love for Windows developers here**
 
 **REQUIREMENT: installed Docker**
 
